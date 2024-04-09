@@ -27,26 +27,31 @@ const UploadCategory = () => {
   };
 
   return (
-    <>
-      <div className="">
-        <h5>Enter Category</h5>
-        <input
-          type="text"
-          className=""
-          value={cat_name}
-          onChange={(e) => setCat(e.target.value)}
-        />
+    <div className="container">
+      <div className="row">
+        <div className="col-md-6">
+          <h5>Enter Category</h5>
+          <input
+            type="text"
+            className="form-control"
+            value={cat_name}
+            onChange={(e) => setCat(e.target.value)}
+          />
+        </div>
       </div>
 
-      <div>
-        <input
-          type="button"
-          value="Upload"
-          className=""
-          onClick={handleSubmit}
-        />
+      <div className="row mt-3">
+        <div className="col-md-6">
+          <button
+            type="button"
+            className="btn btn-primary"
+            onClick={handleSubmit}
+          >
+            Upload
+          </button>
+        </div>
       </div>
-    </>
+    </div>
   );
 };
 

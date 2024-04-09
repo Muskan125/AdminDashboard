@@ -1,6 +1,8 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 import "../../node_modules/bootstrap/dist/css/bootstrap.min.css";
 import "../allCss/SideNav.css";
+
 const SideNav = () => {
   const [collapsed, setCollapsed] = useState(true);
   const [activeSubmenu, setActiveSubmenu] = useState(null);
@@ -27,40 +29,61 @@ const SideNav = () => {
         <div className="navbar-brand">Dashboard {/* Header Name */}</div>
 
         <ul className="navbar-nav mt-2 mt-lg-0 flex-column">
-          {" "}
-          {/* Flex column for vertical layout */}
           <li className="nav-item">
-            <a
+            <Link
+              to="#"
               className="nav-link"
-              href="#"
               onClick={() => handleSubmenuClick("add")}
             >
-              Add <span className="sr-only">(current)</span>
-            </a>
-            {/* Submenu for Add options */}
+              Add
+            </Link>
+
             {activeSubmenu === "add" && (
               <ul className="collapse navbar-collapse show">
-                {" "}
-                {/* Always show submenu when active */}
                 <li className="nav-item">
-                  <a className="nav-link" href="#">
+                  <Link to="./UploadCategory" className="nav-link">
                     Add Category
-                  </a>
+                  </Link>
                 </li>
                 <li className="nav-item">
-                  <a className="nav-link" href="#">
+                  <Link to="./UploadBrand" className="nav-link">
                     Add Brand
-                  </a>
+                  </Link>
                 </li>
                 <li className="nav-item">
-                  <a className="nav-link" href="#">
+                  <Link to="./MainModel" className="nav-link">
                     Add Model
-                  </a>
+                  </Link>
                 </li>
               </ul>
             )}
           </li>
-          {/* Add other navigation links here */}
+
+          <li className="nav-item">
+            <Link
+              to="#"
+              className="nav-link"
+              onClick={() => handleSubmenuClick("view")}
+            >
+              View
+            </Link>
+
+            {activeSubmenu === "view" && (
+              <ul className="collapse navbar-collapse show">
+                <li className="nav-item">
+                  <Link to="./ViewCategory" className="nav-link">
+                    View Categories
+                  </Link>
+                </li>
+                <li className="nav-item">
+                  <Link to="./ViewBrand" className="nav-link">
+                    View Brands
+                  </Link>
+                </li>
+                {/* Add more view options here */}
+              </ul>
+            )}
+          </li>
         </ul>
       </div>
     </nav>

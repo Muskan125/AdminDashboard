@@ -6,15 +6,15 @@ import ViewBrand from "../components/ViewBrand";
 import AddSubCat from "../components/AddSubCat";
 import MainModel from "../components/MainModel";
 import SideNav from "../components/SideNav";
-
+import "../allCss/CustomRoutes.css";
 function CustomRoutes() {
-  // const location = useLocation();
+  const location = useLocation();
 
-  // const isLoginRoute = location.pathname === "/";
+  const isLoginRoute = location.pathname === "/";
 
   return (
-    <>
-      {/* {!isLoginRoute && <SideNav />} */}
+    <div className="DisplayNav">
+      <div className="navdiv">{!isLoginRoute && <SideNav />}</div>
       <Routes>
         <Route path="/" element={<Login />} />
         <Route path="/UploadBrand" element={<UploadBrand />} />
@@ -23,7 +23,7 @@ function CustomRoutes() {
         <Route path="/AddSubCat" element={<AddSubCat />} />
         <Route path="/MainModel" element={<MainModel />} />
       </Routes>
-    </>
+    </div>
   );
 }
 

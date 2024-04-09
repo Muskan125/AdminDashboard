@@ -9,6 +9,7 @@ const MainModel = () => {
   const [selectedSubCat, setSelectedSubCat] = useState("");
   const [brands, setBrands] = useState([]);
   const [selectedBrand, setSelectedBrand] = useState("");
+
   const SubmitAllData = async () => {
     try {
       if (!productName || !selectedCat || !selectedSubCat || !selectedBrand) {
@@ -39,7 +40,6 @@ const MainModel = () => {
         const response = await axios.get(
           "https://onestore-vert.vercel.app/categories"
         );
-        console.log(response.data);
         setCategories(response.data);
       } catch (error) {
         console.error("Error Fetching data: ", error);
@@ -55,7 +55,6 @@ const MainModel = () => {
           const response = await axios.get(
             `https://onestore-vert.vercel.app/selectedsubcategory/${selectedCat}`
           );
-          console.log(response.data);
           setSubCategories(response.data);
         }
       } catch (error) {
@@ -71,7 +70,6 @@ const MainModel = () => {
         const response = await axios.get(
           "https://onestore-vert.vercel.app/brands"
         );
-        console.log(response.data);
         setBrands(response.data);
       } catch (error) {
         console.error("Error Fetching data: ", error);
@@ -82,65 +80,73 @@ const MainModel = () => {
 
   return (
     <>
-      <div>
-        <select
-          value={selectedCat}
-          onChange={(e) => setSelectedCat(e.target.value)}
-        >
-          <option value="">Select Category</option>
-          {categories.map((cat) => (
-            <option key={cat._id} value={cat._id}>
-              {cat.categoryName}
-            </option>
-          ))}
-        </select>
-      </div>
-
-      <div>
-        <select
-          value={selectedSubCat}
-          onChange={(e) => setSelectedSubCat(e.target.value)}
-        >
-          <option value="">Select Subcategory</option>
-          {subCategories.map((subcat) => (
-            <option key={subcat._id} value={subcat._id}>
-              {subcat.subCategoryName}
-            </option>
-          ))}
-        </select>
-      </div>
-
-      <div>
-        <select
-          value={selectedBrand}
-          onChange={(e) => setSelectedBrand(e.target.value)}
-        >
-          <option value="">Select Brands</option>
-          {brands.map((brand) => (
-            <option key={brand._id} value={brand._id}>
-              {brand.brandName}
-            </option>
-          ))}
-        </select>
-      </div>
-
-      <div className="">
-        <h5>Enter Product</h5>
-        <input
-          type="text"
-          className=""
-          value={productName}
-          onChange={(e) => setProductName(e.target.value)}
-        />
-      </div>
-
-      <div>
-        <input
-          type="button"
-          value="Upload"
-          className=""
-          onClick={SubmitAllData}
-        />
+      <div className="container">
+        <div className="row">
+          <div className="col-md-4">
+            <select
+              className="form-control"
+              value={selectedCat}
+              onChange={(e) => setSelectedCat(e.target.value)}
+            >
+              <option value="">Select Category</option>
+              {categories.map((cat) => (
+                <option key={cat._id} value={cat._id}>
+                  {cat.categoryName}
+                </option>
+              ))}
+            </select>
+          </div>
+          <div className="col-md-4">
+            <select
+              className="form-control"
+              value={selectedSubCat}
+              onChange={(e) => setSelectedSubCat(e.target.value)}
+            >
+              <option value="">Select Subcategory</option>
+              {subCategories.map((subcat) => (
+                <option key={subcat._id} value={subcat._id}>
+                  {subcat.subCategoryName}
+                </option>
+              ))}
+            </select>
+          </div>
+          <div className="col-md-4">
+            <select
+              className="form-control"
+              value={selectedBrand}
+              onChange={(e) => setSelectedBrand(e.target.value)}
+            >
+              <option value="">Select Brands</option>
+              {brands.map((brand) => (
+                <option key={brand._id} value={brand._id}>
+                  {brand.brandName}
+                </option>
+              ))}
+            </select>
+          </div>
+        </div>
+        <div className="row">
+          <div className="col-md-12">
+            <h5>Enter Product</h5>
+            <input
+              type="text"
+              className="form-control"
+              value={productName}
+              onChange={(e) => setProductName(e.target.value)}
+            />
+          </div>
+        </div>
+        <div className="row">
+          <div className="col-md-12">
+            <button
+              type="button"
+              className="btn btn-primary"
+              onClick={SubmitAllData}
+            >
+              Upload
+            </button>
+          </div>
+        </div>
       </div>
     </>
   );

@@ -10,7 +10,6 @@ const ViewBrand = () => {
         const response = await axios.get(
           "https://onestore-vert.vercel.app/brands"
         );
-        console.log(response.data);
         setBrands(response.data);
       } catch (error) {
         console.error("Error Fetching data: ", error);
@@ -20,27 +19,28 @@ const ViewBrand = () => {
   }, []);
 
   return (
-    <>
-      <div>
+    <div className="container">
+      <div className="row">
         {brands.map((brand) => (
-          <div key={brand._id}>
-            <h3>{brand.brandName}</h3>
-
-            {brand.brandImage ? (
-              <div>
-                <img
-                  src={`https://onestore-vert.vercel.app/${brand.brandImage}`}
-                  alt={`brand image`}
-                  className=""
-                />
+          <div key={brand._id} className="col-md-4 mb-3">
+            <div className="card">
+              <div className="card-body">
+                <h5 className="card-title">{brand.brandName}</h5>
+                {brand.brandImage ? (
+                  <img
+                    src={`https://onestore-vert.vercel.app/${brand.brandImage}`}
+                    alt={`Brand ${brand.brandName} image`}
+                    className="card-img-top"
+                  />
+                ) : (
+                  <div className="text-muted">No image found</div>
+                )}
               </div>
-            ) : (
-              <div>No image found</div>
-            )}
+            </div>
           </div>
         ))}
       </div>
-    </>
+    </div>
   );
 };
 
