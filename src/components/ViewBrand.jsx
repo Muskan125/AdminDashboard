@@ -22,7 +22,7 @@ const ViewBrand = () => {
     <div className="container">
       <div className="row">
         {brands.map((brand) => (
-          <div key={brand._id} className="col-md-4 mb-3">
+          <div key={brand._id} className="col-md-3 mb-3">
             <div className="card">
               <div className="card-body">
                 <h5 className="card-title">{brand.brandName}</h5>
@@ -31,6 +31,7 @@ const ViewBrand = () => {
                     src={`https://onestore-vert.vercel.app/${brand.brandImage}`}
                     alt={`Brand ${brand.brandName} image`}
                     className="card-img-top"
+                    style={{ maxHeight: "150px", objectFit: "contain" }} // Adjust the image size
                   />
                 ) : (
                   <div className="text-muted">No image found</div>

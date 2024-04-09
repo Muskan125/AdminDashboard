@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 
 const AddSubCat = () => {
-  //For Fetching Category......!!!!!
+  // For Fetching Category......!!!!!
   const [categories, setCategories] = useState([]);
   const [subcat, setSubcat] = useState("");
   const [selectedCat, setSelectedCat] = useState("");
@@ -21,7 +21,8 @@ const AddSubCat = () => {
     };
     fetchCategories();
   }, []);
-  //Uploading Category.....!!!!!!!
+
+  // Uploading Category.....!!!!!!!
   const SubmitSubCat = async () => {
     try {
       if (!subcat || !selectedCat) {
@@ -50,10 +51,11 @@ const AddSubCat = () => {
   };
 
   return (
-    <>
-      <div>
-        <div>
+    <div className="container mt-5">
+      <div className="row">
+        <div className="col-md-6">
           <select
+            className="form-select"
             value={selectedCat}
             onChange={(e) => setSelectedCat(e.target.value)}
           >
@@ -65,27 +67,29 @@ const AddSubCat = () => {
             ))}
           </select>
         </div>
-
-        <div className="">
-          <h5>Enter SubCategory</h5>
-          <input
-            type="text"
-            className=""
-            value={subcat}
-            onChange={(e) => setSubcat(e.target.value)}
-          />
-        </div>
-
-        <div>
-          <input
-            type="button"
-            value="Upload"
-            className=""
-            onClick={SubmitSubCat}
-          />
+      </div>
+      <div className="row mt-3">
+        <div className="col-md-6">
+          <div className="mb-3">
+            <h5>Enter SubCategory</h5>
+            <input
+              type="text"
+              className="form-control"
+              value={subcat}
+              onChange={(e) => setSubcat(e.target.value)}
+            />
+          </div>
+          <div>
+            <input
+              type="button"
+              value="Upload"
+              className="btn btn-primary"
+              onClick={SubmitSubCat}
+            />
+          </div>
         </div>
       </div>
-    </>
+    </div>
   );
 };
 

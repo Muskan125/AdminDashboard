@@ -55,6 +55,11 @@ const SideNav = () => {
                     Add Model
                   </Link>
                 </li>
+                <li className="nav-item">
+                  <Link to="./AddsubCat" className="nav-link">
+                    Add Subcategory
+                  </Link>
+                </li>
               </ul>
             )}
           </li>
@@ -80,7 +85,11 @@ const SideNav = () => {
                     View Brands
                   </Link>
                 </li>
-                {/* Add more view options here */}
+                <li className="nav-item">
+                  <Link to="./ViewProduct" className="nav-link">
+                    View Products
+                  </Link>
+                </li>
               </ul>
             )}
           </li>

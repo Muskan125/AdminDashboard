@@ -6,6 +6,7 @@ import ViewBrand from "../components/ViewBrand";
 import AddSubCat from "../components/AddSubCat";
 import MainModel from "../components/MainModel";
 import SideNav from "../components/SideNav";
+import ViewProduct from "../components/ViewProduct";
 import "../allCss/CustomRoutes.css";
 function CustomRoutes() {
   const location = useLocation();
@@ -22,6 +23,7 @@ function CustomRoutes() {
         <Route path="/UploadCategory" element={<UploadCategory />} />
         <Route path="/AddSubCat" element={<AddSubCat />} />
         <Route path="/MainModel" element={<MainModel />} />
+        <Route path="/ViewProduct" element={<ViewProduct />} />
       </Routes>
     </div>
   );
