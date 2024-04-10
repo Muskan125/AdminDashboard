@@ -41,11 +41,6 @@ const SideNav = () => {
             {activeSubmenu === "add" && (
               <ul className="collapse navbar-collapse show">
                 <li className="nav-item">
-                  <Link to="./UploadCategory" className="nav-link">
-                    Add Category
-                  </Link>
-                </li>
-                <li className="nav-item">
                   <Link to="./UploadBrand" className="nav-link">
                     Add Brand
                   </Link>
@@ -122,6 +117,16 @@ const SideNav = () => {
                 </li> */}
               </ul>
             )}
+          </li>
+
+          <li className="nav-item">
+            <Link
+              to="./Categories"
+              className="nav-link"
+              //onClick={() => handleSubmenuClick("Categories")}
+            >
+              Categories
+            </Link>
           </li>
         </ul>
       </div>
