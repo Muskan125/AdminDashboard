@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import axios from "axios";
 
 const UploadCategory = () => {
-  const [cat_name, setCat] = useState("");
+  const [cat_name, setCatName] = useState("");
 
   const handleSubmit = async () => {
     try {
@@ -19,8 +19,8 @@ const UploadCategory = () => {
         },
       });
 
-      window.alert("Data added successfully");
-      window.location.reload();
+      window.alert("Category added successfully");
+      setCatName(""); // Clear input field after successful submission
     } catch (error) {
       console.error("Error submitting form:", error);
     }
@@ -30,12 +30,12 @@ const UploadCategory = () => {
     <div className="container">
       <div className="row">
         <div className="col-md-6">
-          <h5>Enter Category</h5>
+          <h5>Enter Category Name</h5>
           <input
             type="text"
             className="form-control"
             value={cat_name}
-            onChange={(e) => setCat(e.target.value)}
+            onChange={(e) => setCatName(e.target.value)}
           />
         </div>
       </div>

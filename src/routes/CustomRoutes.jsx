@@ -8,6 +8,7 @@ import MainModel from "../components/MainModel";
 import SideNav from "../components/SideNav";
 import ViewProduct from "../components/ViewProduct";
 import "../allCss/CustomRoutes.css";
+import UpdateCategory from "../components/UpdateCategory";
 function CustomRoutes() {
   const location = useLocation();
 
@@ -24,6 +25,7 @@ function CustomRoutes() {
         <Route path="/AddSubCat" element={<AddSubCat />} />
         <Route path="/MainModel" element={<MainModel />} />
         <Route path="/ViewProduct" element={<ViewProduct />} />
+        <Route path="/UpdateCategory" element={<UpdateCategory />} />
       </Routes>
     </div>
   );
