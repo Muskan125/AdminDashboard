@@ -40,7 +40,24 @@ const UpdateCategory = () => {
 
       window.alert("Category updated successfully");
     } catch (error) {
-      console.error("Error submitting form:", error);
+      console.error("Error updating category:", error);
+    }
+  };
+
+  const handleCategoryDelete = async (categoryId) => {
+    try {
+      await axios.delete(
+        `https://onestore-vert.vercel.app/category/${categoryId}`
+      );
+
+      // Update the local state to remove the deleted category
+      setCategories((prevCategories) =>
+        prevCategories.filter((cat) => cat._id !== categoryId)
+      );
+
+      window.alert("Category deleted successfully");
+    } catch (error) {
+      console.error("Error deleting category:", error);
     }
   };
 
@@ -88,6 +105,9 @@ const UpdateCategory = () => {
               </td>
               <td>
                 <button onClick={() => handleSubmit(cat._id)}>Update</button>
+                <button onClick={() => handleCategoryDelete(cat._id)}>
+                  Delete
+                </button>
               </td>
             </tr>
           ))}
