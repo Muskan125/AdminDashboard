@@ -56,7 +56,7 @@
 //  https://onestore-vert.vercel.app/moblogin  key => mob
 
 import React, { useState } from "react";
-import { MDBBtn, MDBContainer, MDBInput } from "mdb-react-ui-kit";
+import { MDBContainer, MDBInput } from "mdb-react-ui-kit";
 import { useJwt } from "react-jwt";
 import "../../node_modules/bootstrap/dist/css/bootstrap.min.css";
 import axios from "axios";
@@ -94,12 +94,16 @@ const Login = () => {
       const { data } = await axios.post(
         "https://onestore-vert.vercel.app/moblogin",
         {
-          phoneNumber,
+          mob: phoneNumber,
         }
       );
 
-      setUserToken(data.token);
-      console.log("Token = ", userToken);
+      if (data.token) {
+        setUserToken(data.token);
+        console.log("Token = ", data.token);
+      } else {
+        console.error("User not found or other error:", data.error);
+      }
     } catch (error) {
       console.error("Login failed:", error);
     }
