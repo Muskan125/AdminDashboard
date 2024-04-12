@@ -60,10 +60,12 @@ import { MDBContainer, MDBInput } from "mdb-react-ui-kit";
 import { useJwt } from "react-jwt";
 import "../../node_modules/bootstrap/dist/css/bootstrap.min.css";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 const Login = () => {
   const [phoneNumber, setPhoneNumber] = useState("");
   const [userToken, setUserToken] = useState("");
+  const navigate = useNavigate();
   const handleKeyDown = (e) => {
     // Allow: backspace, delete, tab, escape, enter
     if (
@@ -93,6 +95,7 @@ const Login = () => {
     try {
       const { data } = await axios.post(
         "https://onestore-vert.vercel.app/moblogin",
+
         {
           mob: phoneNumber,
         }
@@ -100,7 +103,9 @@ const Login = () => {
 
       if (data.token) {
         setUserToken(data.token);
+        axios.defaults.headers.common["Authorization"] = `Bearer ${userToken}`;
         console.log("Token = ", data.token);
+        navigate("/Categories");
       } else {
         console.error("User not found or other error:", data.error);
       }
