@@ -3,16 +3,35 @@ import axios from "axios";
 
 const MainModel = () => {
   const [productName, setProductName] = useState("");
+  const [productType, setProductType] = useState([]);
+  const [selectedProductType, setSelectedProdType] = useState("");
   const [categories, setCategories] = useState([]);
   const [selectedCat, setSelectedCat] = useState("");
   const [subCategories, setSubCategories] = useState([]);
   const [selectedSubCat, setSelectedSubCat] = useState("");
   const [brands, setBrands] = useState([]);
   const [selectedBrand, setSelectedBrand] = useState("");
+  const [description, setDescription] = useState("");
+  const [Specification, setSpecification] = useState("");
+  const [Pimg, setPimg] = useState([]);
+
+  const handleImageChange = (e) => {
+    const files = Array.from(e.target.files);
+    setPimg([...Pimg, ...files]);
+  };
 
   const SubmitAllData = async () => {
     try {
-      if (!productName || !selectedCat || !selectedSubCat || !selectedBrand) {
+      if (
+        !productName ||
+        !selectedCat ||
+        !selectedSubCat ||
+        !selectedBrand ||
+        !selectedProductType ||
+        !description ||
+        !Specification ||
+        !Pimg.length
+      ) {
         return window.alert("Please fill all the information");
       }
       const formData = new FormData();
@@ -20,14 +39,33 @@ const MainModel = () => {
       formData.append("category", selectedCat);
       formData.append("subcategory", selectedSubCat);
       formData.append("brand", selectedBrand);
+      formData.append("type", selectedProductType);
+      formData.append("description", description);
+      formData.append("specification", Specification);
 
-      await axios.post("https://onestore-vert.vercel.app/model", formData, {
+      console.log("Before map, images:", Pimg);
+
+      // Append images to formData using map
+      const imageFiles = Pimg.map((image) => {
+        formData.append("Categpry Images", image);
+        return image;
+      });
+      await axios.post("https://onestore-vert.vercel.app/addmodel", formData, {
         headers: {
           "Content-Type": "multipart/form-data",
         },
       });
 
       window.alert("Data added successfully");
+      setSelectedBrand("");
+      setProductName("");
+      setSelectedCat("");
+      setSelectedSubCat("");
+      setSelectedProdType("");
+      setPimg([]);
+      setDescription("");
+      setSpecification("");
+
       window.location.reload();
     } catch (error) {
       console.error("Error submitting form:", error);
@@ -47,6 +85,21 @@ const MainModel = () => {
     };
     fetchCategories();
   }, []);
+
+  //ProductType fetch
+  // useEffect(() => {
+  //   const fetchType = async () => {
+  //     try {
+  //       const response = await axios.get(
+  //         "https://onestore-vert.vercel.app/product2"
+  //       );
+  //       setProductType(response.data);
+  //     } catch (error) {
+  //       console.error("Error Fetching data: ", error);
+  //     }
+  //   };
+  //   fetchType();
+  // }, []);
 
   useEffect(() => {
     const fetchSubCategories = async () => {
@@ -99,6 +152,19 @@ const MainModel = () => {
           <div className="col-md-4">
             <select
               className="form-control"
+              value={selectedProductType}
+              onChange={(e) => setSelectedProdType(e.target.value)}
+            >
+              <option value="">Select Type</option>
+              <option value="smartphone">Smartphone</option>
+              <option value="laptop">Laptop</option>
+              <option value="tablet">Tablet</option>
+            </select>
+          </div>
+
+          <div className="col-md-4">
+            <select
+              className="form-control"
               value={selectedSubCat}
               onChange={(e) => setSelectedSubCat(e.target.value)}
             >
@@ -133,6 +199,38 @@ const MainModel = () => {
               className="form-control"
               value={productName}
               onChange={(e) => setProductName(e.target.value)}
+            />
+          </div>
+
+          <div className="col-md-12">
+            <h5>Enter Description</h5>
+            <input
+              type="text"
+              className="form-control"
+              value={description}
+              onChange={(e) => setDescription(e.target.value)}
+            />
+          </div>
+
+          <div className="col-md-12">
+            <h5>Enter Specification</h5>
+            <input
+              type="text"
+              className="form-control"
+              value={Specification}
+              onChange={(e) => setSpecification(e.target.value)}
+            />
+          </div>
+        </div>
+        <div className="row mt-3">
+          <div className="col-md-6">
+            <h5>Upload Category Images</h5>
+            <input
+              type="file"
+              className="form-control"
+              accept="image/jpeg, image/png"
+              multiple
+              onChange={handleImageChange}
             />
           </div>
         </div>

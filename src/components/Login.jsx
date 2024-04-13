@@ -57,7 +57,7 @@ const Login = () => {
         localStorage.setItem("tokenData", JSON.stringify(tokenData));
         axios.defaults.headers.common["Authorization"] = `Bearer ${data.token}`;
         console.log("Token = ", data.token);
-        navigate("/EnquiryHistory");
+        navigate("/MainModel");
       } else {
         console.error("User not found or other error:", data.error);
       }
