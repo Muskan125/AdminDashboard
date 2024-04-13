@@ -1,70 +1,15 @@
-// import React, { useState } from "react";
-// import { Link } from "react-router-dom";
-
-// const Login = () => {
-//   const [phoneNumber, setPhoneNumber] = useState("");
-//   const isValidPhoneNumber = phoneNumber.length === 10;
-
-//   const handleInputChange = (event) => {
-//     const inputNumber = event.target.value.replace(/\D/g, ""); // Remove non-digit characters
-//     if (inputNumber.length <= 10) {
-//       setPhoneNumber(inputNumber);
-//     }
-//   };
-
-//   const handleSubmit = (event) => {
-//     event.preventDefault();
-//     if (isValidPhoneNumber) {
-//       // Navigate to Dashboard
-//       window.location.href = "/UploadBrand"; // Assuming this is an external link
-//     } else {
-//       alert("Please enter a valid 10-digit number.");
-//     }
-//   };
-
-//   return (
-//     <>
-//       {/* <div className="">
-//         <div className="">
-//           <h1 className="mb-4">Login</h1>
-//           <form className="" onSubmit={handleSubmit}>
-//             <input
-//               type="text"
-//               name="pnumber"
-//               id="pnumber"
-//               className=""
-//               placeholder="Enter Your Number"
-//               value={phoneNumber}
-//               onChange={handleInputChange}
-//               pattern="[0-9]{10}"
-//               title="Please enter a 10-digit number."
-//               maxLength={10}
-//               required
-//             />
-//             <button type="submit" className="" disabled={!isValidPhoneNumber}>
-//               Submit
-//             </button>
-//           </form>
-//         </div>
-//       </div> */}
-//     </>
-//   );
-// };
-//https://youtu.be/SYv61aPSiOo?si=Hxm9DDYjahs2odm5
-// export default Login;
-
 //  https://onestore-vert.vercel.app/moblogin  key => mob
 
 import React, { useState } from "react";
 import { MDBContainer, MDBInput } from "mdb-react-ui-kit";
-import { useJwt } from "react-jwt";
+//import { useJwt } from "react-jwt";
 import "../../node_modules/bootstrap/dist/css/bootstrap.min.css";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
 const Login = () => {
   const [phoneNumber, setPhoneNumber] = useState("");
-  const [userToken, setUserToken] = useState("");
+
   const navigate = useNavigate();
   const handleKeyDown = (e) => {
     // Allow: backspace, delete, tab, escape, enter
@@ -95,15 +40,13 @@ const Login = () => {
     try {
       const { data } = await axios.post(
         "https://onestore-vert.vercel.app/moblogin",
-
         {
           mob: phoneNumber,
         }
       );
 
       if (data.token) {
-        setUserToken(data.token);
-        axios.defaults.headers.common["Authorization"] = `Bearer ${userToken}`;
+        axios.defaults.headers.common["Authorization"] = `Bearer ${data.token}`;
         console.log("Token = ", data.token);
         navigate("/Categories");
       } else {
@@ -113,6 +56,7 @@ const Login = () => {
       console.error("Login failed:", error);
     }
   };
+
   return (
     <div
       style={{
