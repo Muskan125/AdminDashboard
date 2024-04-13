@@ -1,7 +1,7 @@
 import { Routes, Route, useLocation } from "react-router-dom";
 import Login from "../components/Login";
 import UploadBrand from "../components/UploadBrand";
-import UploadCategory from "../components/UploadCategory";
+
 import ViewBrand from "../components/ViewBrand";
 import AddSubCat from "../components/AddSubCat";
 import MainModel from "../components/MainModel";
@@ -9,6 +9,7 @@ import SideNav from "../components/SideNav";
 import ViewProduct from "../components/ViewProduct";
 import "../allCss/CustomRoutes.css";
 import Categories from "../Pages/Categories";
+import EnquiryHistory from "../components/EnquiryHistory";
 
 function CustomRoutes() {
   const location = useLocation();
@@ -17,7 +18,7 @@ function CustomRoutes() {
 
   return (
     <div className="DisplayNav">
-      <div className="navdiv">{!isLoginRoute && <SideNav />}</div>
+      {/* <div className="navdiv">{!isLoginRoute && <SideNav />}</div> */}
       <Routes>
         <Route path="/" element={<Login />} />
         <Route path="/UploadBrand" element={<UploadBrand />} />
@@ -26,6 +27,7 @@ function CustomRoutes() {
         <Route path="/MainModel" element={<MainModel />} />
         <Route path="/ViewProduct" element={<ViewProduct />} />
         <Route path="/Categories" element={<Categories />} />
+        <Route path="/EnquiryHistory" element={<EnquiryHistory />} />
       </Routes>
     </div>
   );

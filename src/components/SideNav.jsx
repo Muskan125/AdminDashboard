@@ -85,6 +85,11 @@ const SideNav = () => {
                     View Products
                   </Link>
                 </li>
+                <li className="nav-item">
+                  <Link to="./EnquiryHistory" className="nav-link">
+                    EnquiryHistory
+                  </Link>
+                </li>
               </ul>
             )}
           </li>

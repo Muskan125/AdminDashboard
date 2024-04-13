@@ -13,6 +13,7 @@ const Login = () => {
   const [phoneNumber, setPhoneNumber] = useState("");
 
   const navigate = useNavigate();
+
   const handleKeyDown = (e) => {
     // Allow: backspace, delete, tab, escape, enter
     if (
@@ -48,9 +49,15 @@ const Login = () => {
       );
 
       if (data.token) {
+        const expirationTime = Date.now() + 86400000; // 24 hours
+        const tokenData = {
+          token: data.token,
+          expiresAt: expirationTime,
+        };
+        localStorage.setItem("tokenData", JSON.stringify(tokenData));
         axios.defaults.headers.common["Authorization"] = `Bearer ${data.token}`;
         console.log("Token = ", data.token);
-        navigate("/Categories");
+        navigate("/EnquiryHistory");
       } else {
         console.error("User not found or other error:", data.error);
       }
@@ -117,7 +124,7 @@ const Login = () => {
               <button
                 className="mb-3"
                 style={{
-                  color: "white",
+                  color: "black",
                   borderRadius: "5px",
                   padding: "5px",
                   backgroundColor: "#438eff",
